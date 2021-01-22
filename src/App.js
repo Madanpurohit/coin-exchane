@@ -9,13 +9,16 @@ function App() {
       </header>
       <table>
         <thead>
+          <tr>
           <th>Name</th>
           <th>Ticker</th>
           <th>Price</th>
+          </tr>
         </thead>
         <tbody>
-          <Coin name="Bitcoin" ticker="BTC" price="9999.99$"/>
-          <Coin name="Etherium" ticker="ETH" price="299.99$"/>
+          <Coin name="Bitcoin" ticker="BTC" price={9999}/>
+          <Coin name="Etherium" ticker="ETH" price={299}/>
+          <Coin name="TUSDT" ticker="USDT" price={1}/>
         </tbody>
       </table>
     </div>
