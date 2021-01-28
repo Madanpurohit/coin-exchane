@@ -17,7 +17,7 @@ export default class CoinData extends Component {
             //   <Coin key={value.ticker} name={value.name} ticker={value.ticker} price={value.price}/>
             // ))
             this.props.coinList.map(value=>(
-              <Coin key={value.ticker} {...value}/>
+              <Coin key={value.ticker} {...value} handleRefresh={this.props.handleRefresh}/>
             ))
             /* <Coin name={this.state.coinList[0].name} ticker={this.state.coinList[0].ticker} price={this.state.coinList[0].price}/>
             <Coin name={this.state.coinList[1].name} ticker={this.state.coinList[1].ticker} price={this.state.coinList[1].price}/>
