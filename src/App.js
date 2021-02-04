@@ -4,7 +4,7 @@ import AccountBalance from './Components/AccountBalance/AccountBalance';
 import CoinData from './Components/CoinData/CoinData';
 import HeaderDesign from './Components/HeaderDesign/HeaderDesign';
 import axios from 'axios';
-const coinCount=50;
+const coinCount=10;
 class App extends React.Component{
   state={
     balance:10000,
@@ -32,16 +32,21 @@ class App extends React.Component{
   }
   componentDidMount=async()=>{
     const response=await axios.get('https://api.coinpaprika.com/v1/coins')
-      let coinList=response.data.slice(0,coinCount).map(function(coin){
-        return{
-          key:coin.id,
-          name:coin.name,
-          ticker:coin.symbol,
-          ammount:0,
-          price:0
-        }
-      });
-      this.setState({coinList});
+    const coinIds=response.data.slice(0,coinCount).map(coin=>coin.id);
+    const tickerurl='https://api.coinpaprika.com/v1/tickers/';
+    const promises=coinIds.map(id=>axios.get(tickerurl+id));
+    const coinData=await Promise.all(promises);
+    const coinPriceData=coinData.map(function(response){
+      let coin=response.data;
+      return{
+        key:coin.id,
+        name:coin.name,
+        ticker:coin.symbol,
+        price:parseFloat(Number(coin.quotes.USD.price).toFixed(2)),
+        ammount:0
+      }
+    })
+    this.setState({coinList:coinPriceData});
   }
   handleRefresh=(valueChangeTicker)=>{
     const newcoinData=this.state.coinList.map(function(values){
