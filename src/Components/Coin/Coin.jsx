@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import propTypes from 'prop-types';
 export default class Coin extends Component {
-    constructor(props){
-        super(props);
-        this.handleclick=this.handleclick.bind(this);
-
-    }
-    handleclick(event){
+    handleclick=(event)=>{
         event.preventDefault()
             this.props.handleRefresh(this.props.ticker);
         }   
