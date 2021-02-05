@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 export default class Coin extends Component {
     handleclick=(event)=>{
         event.preventDefault()
-            this.props.handleRefresh(this.props.ticker);
+            this.props.handleRefresh(this.props.tickerId);
         }   
     render() {
         return (
